@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
         });
 
         // se não houve erros até aqui
-        res.status(200).json({user: payload, token});
+        res. status(200).json({user: payload, token});
     }   catch(error) {
         res.status(500).json({message: 'Error trying to login', error: error.message});
     }

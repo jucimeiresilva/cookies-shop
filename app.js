@@ -15,6 +15,9 @@ app.use(cors());
 //rotas públicas
  app.use('/auth', require('./routes/auth.routes')); 
 
-app.listen(process.env.PORT, () => {
+ //middlewares de rotas
+ app.use(require('./middlewares/auth.middleware'));
+
+ app.listen(process.env.PORT, () => {
     console.log(`server running on PORT: ${process.env.PORT}`);
 });
