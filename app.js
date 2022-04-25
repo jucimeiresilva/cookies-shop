@@ -20,6 +20,8 @@ app.use(cors());
 
  app.use('/products', require('./routes/products.routes'));
 
+ app.use('/historic', require('./routes/historic.routes'));
+
  app.listen(process.env.PORT, () => {
     console.log(`server running on PORT: ${process.env.PORT}`);
 });
