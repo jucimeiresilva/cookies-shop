@@ -22,7 +22,8 @@ const productsSchema = new Schema(
             ref: 'User'
         }
 
-    }
-)
+    },
+     {timestamps: true} 
+);
 
 module.exports = model('Products', productsSchema)

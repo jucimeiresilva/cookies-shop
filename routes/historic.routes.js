@@ -6,8 +6,9 @@ const router = Router()
 
 router.post('/', async (req, res) => {
     const { id } = req.user
+    const { product } = req.body
     try {
-        const historic = await Historic.create({ ...req.body, userId: id})
+        const historic = await Historic.create({ product, user: id})
         res.status(200).json(historic)
     } catch (error) {
         res.status(500).json({ message: "Error while trying to create historic", error})

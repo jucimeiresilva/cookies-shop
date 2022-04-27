@@ -12,7 +12,7 @@ const userSchema = new Schema (
         type: String,
     },
 
-    address: {
+    adress: {
         type: String
     },
 
