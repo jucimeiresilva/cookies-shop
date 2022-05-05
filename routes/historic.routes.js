@@ -6,9 +6,9 @@ const router = Router()
 
 router.post('/', async (req, res) => {
     const { id } = req.user
-    const { product } = req.body
+    const { historic } = req.body //?
     try {
-        const historic = await Historic.create({ product, user: id})
+        const historic = await Historic.create({ historic, user: id})
         res.status(200).json(historic)
     } catch (error) {
         res.status(500).json({ message: "Error while trying to create historic", error})
@@ -22,6 +22,16 @@ router.get('/', async (req, res) => {
             res.status(200).json(historic)
     } catch (error) {
         res.status(500).json({ message: "Error while trying to get all historic", error})
+    }
+})
+
+router.get('/', async (req, res) => {
+    const { id } = req.user
+    try {
+        const historic = await Historic.find({ historic, user: id})
+            res.status(200).json(historic)
+    } catch (error) {
+        res.status(500).json({ message: "Error while trying to get historic", error})
     }
 })
 

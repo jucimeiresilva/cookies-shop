@@ -8,14 +8,14 @@ connect();
 
 const app = express();
 
-// middlewares gerais
+app.use(cors())
+
 app.use(express.json());
 app.use(cors());
 
-//rotas públicas
  app.use('/auth', require('./routes/auth.routes')); 
 
- //middlewares de rotas
+
  app.use(require('./middlewares/auth.middleware'));
 
  app.use('/products', require('./routes/products.routes'));

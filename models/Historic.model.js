@@ -12,9 +12,6 @@ const historicSchema = new Schema (
                 type: Schema.Types.ObjectId,
                 ref: "Products"
             },
-        
-   
-
 },
     {timestamps: true}
 );

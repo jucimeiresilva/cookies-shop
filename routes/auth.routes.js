@@ -10,13 +10,13 @@ const router = Router();
 
 router.post('/signup', async (req, res) => {
     
-    const { name, password } = req.body;
+    const { name, birthDate, adress, phone, email, password } = req.body;
     try {
-        if (!name || !password) {
+        if (!name || !birthDate || !adress || !phone || !email || !password) {
             throw new Error ('Missing username or password');
         }
         
-        const userFromDb = await User.findOne({name});
+        const userFromDb = await User.findOne({email});
         if(userFromDb) {
             throw new Error ('Username already exists');
         }
@@ -26,6 +26,10 @@ router.post('/signup', async (req, res) => {
 
         await User.create({
             name,
+            birthDate,
+            adress,
+            phone,
+            email,
             passwordHash,
         })
 
@@ -35,40 +39,34 @@ router.post('/signup', async (req, res) => {
     }
 })
 
-//login
 
 router.post('/login', async (req, res) => {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
     try {
-        if (!name || !password) {
+        if (!email || !password) {
             throw new Error('Missing information');
         }
 
-        //verifico se o usuário existe
-        const userFromDb = await User.findOne({name});
+        const userFromDb = await User.findOne({email});
         if (!userFromDb) {
             throw new Error('Wrong name or password');
         }
 
-        //valido a senha
         const validation = bcrypt.compareSync(password, userFromDb.passwordHash);
 
         if(!validation) {
             throw new Error('Wrong name or password');
         }
 
-        //crio informações para o token carregar
         const payload = {
             id: userFromDb._id,
-            name: userFromDb.name
+            email: userFromDb.email
         };
 
-        //criar o token que vai carregar a informação do login
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn: '1day'
         });
 
-        // se não houve erros até aqui
         res. status(200).json({user: payload, token});
     }   catch(error) {
         res.status(500).json({message: 'Error trying to login', error: error.message});

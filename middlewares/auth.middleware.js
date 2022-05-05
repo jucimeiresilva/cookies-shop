@@ -1,6 +1,3 @@
-// middleware = validar o token
-
-
 const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
@@ -15,8 +12,7 @@ const auth = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     req.user = { ... decodedToken };
 
-    // se não houve erros até aqui, segue para a próxima rota
-    next();
+       next();
 }   catch (error) {
     res.status(401).json({message: "Unauthorized", error: error.message});
     }

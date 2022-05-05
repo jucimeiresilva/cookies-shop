@@ -5,7 +5,6 @@ const userSchema = new Schema (
     name: {
         type: String,
         required: true,
-        unique: true,
     },
 
     birthDate: {
@@ -22,7 +21,12 @@ const userSchema = new Schema (
 
     passwordHash: {
         type: String,
+    },
+
+    email: {
+        type: String,
         required: true,
+        unique: true,
     }
 
 },
