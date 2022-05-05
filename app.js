@@ -23,5 +23,5 @@ app.use(cors());
  app.use('/historic', require('./routes/historic.routes'));
 
  app.listen(process.env.PORT, () => {
-    console.log(`server running on PORT: ${process.env.PORT}`);
+    console.log(`SERVER RUNNING ON PORT: ${process.env.PORT}`);
 });
