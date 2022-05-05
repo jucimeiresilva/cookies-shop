@@ -6,7 +6,7 @@ const router = Router()
 
 router.post('/', async (req, res) => {
     const { id } = req.user
-    const { historic } = req.body //?
+    const { historic } = req.body
     try {
         const historic = await Historic.create({ historic, user: id})
         res.status(200).json(historic)
