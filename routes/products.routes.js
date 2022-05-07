@@ -5,16 +5,16 @@ const Products = require('../models/Products.model')
 const router = Router()
 
 router.post('/', async (req, res) => {
-    const { id } = req.user
+    const product = req.body
     try {
-        const products = await Products.create({ ...req.body, userId: id})
+        const products = await Products.create(product)
         res.status(200).json(products)
     } catch (error) {
         res.status(500).json({ message: "Error while trying to create products", error})
     }
 })
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const products = await Products.find()
             res.status(200).json(products)
@@ -24,9 +24,8 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const { id } = req.user
     try {
-        const products = await Products.find({ products, user: id})
+        const products = await Products.find()
             res.status(200).json(products)
     } catch (error) {
         res.status(500).json({ message: "Error while trying to get products", error})
@@ -36,7 +35,7 @@ router.get('/', async (req, res) => {
 router.put('/:productsId', async (req, res) => {
     const { productsId } = req.params 
     try {
-        const products = await Products.findByIdAndUpdate(productsId, req.body, { new: true })
+        const updatedProducts = await Products.findByIdAndUpdate(productsId, req.body, { new: true })
         res.status(200).json(updatedProducts) 
     } catch (error) {
         res.status(500).json({ message: "Error while trying to update a products", error})

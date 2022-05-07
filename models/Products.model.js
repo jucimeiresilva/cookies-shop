@@ -16,12 +16,7 @@ const productsSchema = new Schema(
         imageUrl: {
             type: String
         },
-        reviews: [],
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-
+      
     },
      {timestamps: true} 
 );

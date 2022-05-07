@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const historicSchema = new Schema (
+const orderSchema = new Schema (
     {
         user: {
             type: Schema.Types.ObjectId,
@@ -18,4 +18,4 @@ const historicSchema = new Schema (
 
 
 
-module.exports = model("Historic", historicSchema);
+module.exports = model("Order", orderSchema);
